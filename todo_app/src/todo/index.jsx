@@ -171,11 +171,11 @@ const TodoHome = ()=>{
 
     const onClickRefreshBtn = ()=>{
         fetchData()
-        return (Swal.fire({
-            title: 'Success',
-            icon: 'success',
-            confirmButtonText: 'Done'
-          }))
+        // return (Swal.fire({
+        //     title: 'Success',
+        //     icon: 'success',
+        //     confirmButtonText: 'Done'
+        //   }))
     }
 
     const onClickAdd = async ()=>{

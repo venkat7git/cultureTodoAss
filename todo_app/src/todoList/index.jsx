@@ -30,7 +30,8 @@ const TodoList = (props)=>{
     } 
 
     const paraStyle = isDone?'line-through':'none';
-    
+    const inputBg = isDone?'linear-gradient(to right,#0471de,#0471de':'linear-gradient(to right,#984f92,#4f7bb0)';
+    const borderStlye = isDone?'1px solid #ffffff':'none';
     const onClickEdit = ()=>{
         setisEdit(prevState=>!prevState)
     }
@@ -39,7 +40,7 @@ const TodoList = (props)=>{
         <li className="item">
             <p className="date-para">{time}</p>
             <div className="list-item">
-                <div className="input-cont">
+                <div className="input-cont" style={{backgroundImage:inputBg,border:borderStlye}}>
                     <input onClick={onChangeCheckbox} defaultChecked={isDone} className="checkbox" type="checkbox" />
                 </div>
                 <div className='todo-item'>

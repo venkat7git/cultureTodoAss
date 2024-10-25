@@ -16,10 +16,10 @@ const client = new MongoClient(uri);
 
 let todo = null;
 
-const dbConnection = async ()=>{
+const dbConnection = ()=>{
     try{
-        const database = await client.db('todoDb');
-        todo = await database.collection('todoCn');
+        const database = client.db('todoDb');
+        todo =  database.collection('todoCn');
         app.listen(3007,()=>{
             console.log('server listening port:3007');
         })
