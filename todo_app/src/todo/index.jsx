@@ -24,7 +24,7 @@ const TodoHome = ()=>{
     let timeOut = null;
     const fetchData = async ()=>{
         setApiStatus(apiConstants.inProgress)
-        const url = 'http://localhost:3007/todos';
+        const url = 'https://todobackenddepl-1.onrender.com/todos';
         const response = await fetch(url);
         if(response.ok){
             const data = await response.json()
@@ -61,7 +61,7 @@ const TodoHome = ()=>{
             return eachTodo;
         });
 
-        const response = await axios.put(`http://localhost:3007/updateTodoText/${id}`,{todo:val,time:`mdf ${dateTime}`}).then(response=>{
+        const response = await axios.put(`https://todobackenddepl-1.onrender.com/updateTodoText/${id}`,{todo:val,time:`mdf ${dateTime}`}).then(response=>{
             return response
         }).catch(err=>{
             return err
@@ -78,17 +78,19 @@ const TodoHome = ()=>{
         const changeObj = todoList.find(eachTodo=>(eachTodo.id === id));
         const updatedData = todoList.map(eachTodo=>{
             if(id === eachTodo.id){
-                return {...eachTodo,isDone:!eachTodo.isDone}
+                return {...eachTodo,isDone:!eachTodo.isDone,time:`done ${dateTime}`}
             }
             return eachTodo
         })
 
-       const response = await axios.put(`http://localhost:3007/updateTodo/${id}`,{isDone:!changeObj.isDone,time:`done ${dateTime}`}).then(response=>{
+        setTodoList(updatedData)
+
+       const response = await axios.put(`https://todobackenddepl-1.onrender.com/updateTodo/${id}`,{isDone:!changeObj.isDone,time:`done ${dateTime}`}).then(response=>{
             return response
         }).catch(err=>{
             return err
         })
-        setTodoList(updatedData)
+        
         
         
         
@@ -161,7 +163,7 @@ const TodoHome = ()=>{
     const onDeleteTodo = async (id)=>{
         const filterData = todoList.filter(eachTodo => (id !== eachTodo.id))
         setTodoList(filterData);
-        await axios.delete(`http://localhost:3007/deleteTodo/${id}`).then(response=>{
+        await axios.delete(`https://todobackenddepl-1.onrender.com/deleteTodo/${id}`).then(response=>{
             console.log(response);
         }).catch(err=>{
             console.log(err);
@@ -187,7 +189,8 @@ const TodoHome = ()=>{
             time:time,
             isDone:false
         }
-        await axios.post(`http://localhost:3007/newTodo`,newTodo).then(response=>{
+        setTodoList([newTodo,...todoList])
+        await axios.post(`https://todobackenddepl-1.onrender.com/newTodo`,newTodo).then(response=>{
             console.log(response)
         }).catch(err=>{
             console.log(err)
